@@ -9,7 +9,7 @@ now=$(getDate)
 del=$(getDate1)
 
 
-for disk in `yc compute disk list --folder-id "id вашей папки" | awk -F"|" '/backup/ {print $3}' | sed s/' '//g`
+for disk in `yc compute disk list --folder-id "id вашей папки" | awk -F"|" '/backup-/ {print $3}' | sed s/' '//g`
 do
     (
         yc compute snapshot create --folder-id "id вашей папки" --name ${disk}-$now --disk-name ${disk} &&\
