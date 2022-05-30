@@ -8,13 +8,13 @@ getDate1() {
 now=$(getDate)
 del=$(getDate1)
 
-for disk in `yc compute disk list | awk -F"|" '/backup/ {print $3}' | sed s/' '//g`
+for disk in `yc compute disk list | awk -F"|" '/backup-/ {print $3}' | sed s/' '//g`
 do
     yc compute snapshot create --name ${disk}-$now --disk-name ${disk}
 done
 
 
-for disk in `yc compute disk list | awk -F"|" '/backup/ {print $3}' | sed s/' '//g`
+for disk in `yc compute disk list | awk -F"|" '/backup-/ {print $3}' | sed s/' '//g`
 do
     yc compute snapshot delete --name ${disk}-$del
 done
